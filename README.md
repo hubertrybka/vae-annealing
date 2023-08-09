@@ -16,10 +16,11 @@
  * shape (str): Shape of the annealing function. Can be 'linear', 'cosine', or 'logistic'.  
  Annealer can be instantiated with disable=True parameter. This way an intance of Annealer can be still called, but the argument passed to the __call__() method will be returned unchanged.
   
- An instance of Annealer is callable.
- Args:
- * kld (torch.tensor): Kullback–Leibler divergence loss (or any ohter loss object for which multiplication by a scalar is defined)
- Returns:
+An instance of Annealer is callable.  
+Args:
+ * kld (torch.tensor): Kullback–Leibler divergence loss (or any ohter loss object for which multiplication by a scalar is defined.
+  
+Returns:  
  * torch.tensor: KL divergence loss multiplied by the slope of the annealing function  
  
  ## Usage:
