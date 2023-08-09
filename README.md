@@ -18,7 +18,7 @@
   
 An instance of Annealer is callable.  
 Args:
- * kld (torch.tensor): Kullback–Leibler divergence loss (or any ohter loss object for which multiplication by a scalar is defined.
+ * kld (torch.tensor): Kullback–Leibler divergence loss (or any ohter loss object for which multiplication by a scalar is defined).
   
 Returns:  
  * torch.tensor: KL divergence loss multiplied by the slope of the annealing function  
