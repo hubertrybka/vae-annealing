@@ -23,7 +23,7 @@
  * torch.tensor: KL divergence loss multiplied by the slope of the annealing function  
  
  ## Usage:
- An instance of Annealer class stores total_steps and current_steps as attributes and uses them to calculate the slope of annealing function at each step. Annealer is to be instantiated before the training loop, ex:  
+ An instance of Annealer class stores total_steps and current_steps integer attributes and uses them to calculate the slope of annealing function at each step. Annealer is to be instantiated before the training loop, ex:  
  ```
  from annealing import Annealer, VAELoss
   
