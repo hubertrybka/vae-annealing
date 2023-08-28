@@ -21,7 +21,7 @@ Args:
  * kld (torch.tensor): Kullback–Leibler divergence loss (or any ohter loss object for which multiplication by a scalar is defined).
   
 Returns:  
- * torch.tensor: KL divergence loss multiplied by the slope of the annealing function
+ * torch.tensor: KL divergence loss multiplied by the value of the annealing function
   
 ![annealing](https://github.com/hubertrybka/vae-annealing/assets/126616541/77b0f772-a923-483e-9d56-9c2907e408ef)
  
