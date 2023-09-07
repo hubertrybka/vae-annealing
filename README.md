@@ -42,4 +42,4 @@ Returns:
      optimizer.step()
      annealing_agent.step()
  ```  
- After each epoch `annealing_agent.step()` method is to be called. This increases the current_step attribute by 1, unitl the value matches total_steps attribute. Based on those values, the slope of an annealing function is calculated. Initial value of current_step is always 1.
+ After each epoch `annealing_agent.step()` method is to be called. This increases the current_step attribute by 1, unitl the value matches total_steps attribute. Based on those values, the slope of an annealing function is calculated. Initial value of current_step is always 0.
