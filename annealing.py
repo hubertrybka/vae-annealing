@@ -13,7 +13,7 @@ class Annealer:
 
     def __init__(self, total_steps: int, shape: str, disable=False):
         self.total_steps = total_steps
-        self.current_step = 1
+        self.current_step = 0
         if not disable:
             self.shape = shape
         else:
@@ -31,9 +31,9 @@ class Annealer:
 
     def slope(self):
         if self.slope == 'linear':
-            slope = (self.current_step / self.total_steps)
+            slope = (self.current_step -1 / self.total_steps-1)
         elif self.slope == 'cosine':
-            slope = 0.5 + 0.5 * math.cos(math.pi * (self.current_step / self.total_steps - 1))
+            slope = 0.5 + 0.5 * math.cos(math.pi * (self.current_step / self.total_steps))
         elif self.slope == 'logistic':
             smoothness = self.total_steps / 10
             exponent = ((self.total_steps / 2) - self.current_step) / smoothness
