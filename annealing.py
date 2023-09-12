@@ -35,8 +35,7 @@ class Annealer:
         elif self.slope == 'cosine':
             slope = 0.5 + 0.5 * math.cos(math.pi * (self.current_step / self.total_steps))
         elif self.slope == 'logistic':
-            smoothness = self.total_steps / 10
-            exponent = ((self.total_steps / 2) - self.current_step) / smoothness
+            exponent = (self.total_steps / 2) - self.current_step
             slope = 1 / (1 + math.exp(exponent))
         elif self.slope == 'none':
             slope = 1.0
