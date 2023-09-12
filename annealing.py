@@ -29,17 +29,17 @@ class Annealer:
 
     def slope(self):
         if self.shape == 'linear':
-            slope = (self.current_step / self.total_steps)
+            slope_y = (self.current_step / self.total_steps)
         elif self.shape == 'cosine':
-            slope = (math.cos(math.pi * (self.current_step / self.total_steps - 1)) + 1) / 2
+            slope_y = (math.cos(math.pi * (self.current_step / self.total_steps - 1)) + 1) / 2
         elif self.shape == 'logistic':
             exponent = ((self.total_steps / 2) - self.current_step)
-            slope = 1 / (1 + math.exp(exponent))
+            slope_y = 1 / (1 + math.exp(exponent))
         elif self.shape == 'none':
-            slope = 1.0
+            slope_y = 1.0
         else:
             raise ValueError('Invalid shape for annealing function. Must be linear, cosine, or logistic.')
-        return slope
+        return slope_y
 
     def step(self):
         if self.current_step < self.total_steps:
