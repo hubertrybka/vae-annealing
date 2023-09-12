@@ -23,7 +23,7 @@ Args:
 Returns:  
  * torch.tensor: KL divergence loss multiplied by the value of the annealing function
   
-![annealing](https://github.com/hubertrybka/vae-annealing/assets/126616541/77b0f772-a923-483e-9d56-9c2907e408ef)
+![Basic anneling shapes](https://github.com/hubertrybka/vae-annealing/blob/main/shapes.png)
  
  ## Usage:
  An instance of Annealer class stores total_steps and current_steps integer attributes and uses them to calculate the slope of annealing function at each step. Annealer is to be instantiated before the training loop, ex:  
