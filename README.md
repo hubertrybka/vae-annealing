@@ -12,7 +12,7 @@
   
 ## Annealer  
  Annealer is a class. An instance is created by passing two parameters:
- * slope_length (int): Number of epochs to reach full KL divergence weight
+ * slope_length (int): Number of epochs (steps) to reach full KL divergence weight
  * shape (str): Shape of the annealing function. Can be 'linear', 'cosine', or 'logistic'.  
  Annealer can be instantiated with disable=True parameter. This way an intance of Annealer can be still called, but the argument passed to the __call__() method will be returned unchanged.
   
@@ -28,7 +28,8 @@ Returns:
  ## Usage:
  An instance of Annealer class stores total_steps and current_steps integer attributes and uses them to calculate the slope of annealing function at each step. Annealer is to be instantiated before the training loop, ex:  
  ```
- from annealing import Annealer, VAELoss
+ from loss import VAELoss
+ from annealing import Annealer
   
  annealing_agent = Annealer(slope_length, shape='cosine')  # instantiating annealing agent
  criterion = VAELoss()  # instantiating VAELoss
