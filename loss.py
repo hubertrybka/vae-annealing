@@ -20,6 +20,6 @@ class VAELoss(torch.nn.Module):
             bce (torch.Tensor): binary cross entropy loss (VAE recon loss)
             kld (torch.Tensor): KL divergence loss
         """
-        bce = torch.nn.functional.binary_cross_entropy(x0, x, reduction='sum')
-        kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+        bce = torch.nn.functional.binary_cross_entropy(x0, x, reduction='mean')
+        kld = torch.mean(-0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim=1), dim=0)
         return bce, kld
