@@ -53,7 +53,7 @@ Returns:
 
  Cyclical annealing is enabled by instantiating the Annealer with cyclical=True parameter. When this is done, every time the step counter (current_step) reaches total_steps, it's value is set to zero. The annealing cycle starts over again until it is disabled.  
    
- The cyclical annealing functionality can be disabled (or enabled) during the course of training by passing False (or True) vale to the Annealer.cyclical_setter() method. An example of cyclical annealing being disabled during it's second cycle is illustrated below:
+ The cyclical annealing functionality can be disabled (or enabled) during the course of training by passing False (or True) value to the Annealer.cyclical_setter() method. An example of cyclical annealing being **disabled at epoch 30** and **enabled again at epoch 70** is illustrated below:
  ```
  annealing_agent = Annealer(slope_length, shape='cosine', cyclical=True)
  # instantiating annealing agent with cyclical annealing functionality
@@ -62,7 +62,9 @@ Returns:
  ... # training script
  if epoch == 30:
      annealing_agent.cyclical_setter = False
+ if epoch == 70:
+     annealing_agent.cyclical_setter = True
  ```  
  The expected outcome:  
    
- ![Cyclkical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/cyclical_disable.png)
+ ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/cyclical_disable.png)
