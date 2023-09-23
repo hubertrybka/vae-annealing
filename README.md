@@ -64,4 +64,5 @@ Returns:
      annealing_agent.cyclical_setter = False
  ```  
  The expected outcome:  
+   
  ![Cyclkical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/cyclical_disable.png)
