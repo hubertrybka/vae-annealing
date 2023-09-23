@@ -58,13 +58,14 @@ Returns:
  annealing_agent = Annealer(slope_length, shape='cosine', cyclical=True)
  # instantiating annealing agent with cyclical annealing functionality
   
- for epoch in range(100):  # training loop starts here
- ... # training script
- if epoch == 30:
-     annealing_agent.cyclical_setter = False
- if epoch == 70:
-     annealing_agent.cyclical_setter = True
+ for epoch in range(100):
+     ...  # training script
+
+     if epoch == 30:
+         annealing_agent.cyclical_setter(False)
+     if epoch == 70:
+         annealing_agent.cyclical_setter(True)
  ```  
  The expected outcome:  
    
- ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/cyclical_disable.png)
+ ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/enable_disable.png)
