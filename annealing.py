@@ -53,7 +53,7 @@ class Annealer:
     def step(self):
         if self.current_step < self.total_steps:
             self.current_step += 1
-        if self.cyclical and self.current_step == self.total_steps:
+        if self.cyclical and self.current_step >= self.total_steps:
             self.current_step = 0
         return
 
