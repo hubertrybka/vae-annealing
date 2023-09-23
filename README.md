@@ -26,7 +26,7 @@ Returns:
 ![Basic anneling shapes](https://github.com/hubertrybka/vae-annealing/blob/main/shapes.png)
  
  ## Usage:
- An instance of Annealer class stores total_steps and current_steps integer attributes and uses them to calculate the slope of annealing function at each step. Annealer is to be instantiated before the training loop, ex:  
+ An instance of Annealer class stores total_steps and current_steps integer attributes and uses them to calculate the value of annealing coefficient at each step. Annealer is to be instantiated before the training loop, ex:  
  ```
  from loss import VAELoss
  from annealing import Annealer
