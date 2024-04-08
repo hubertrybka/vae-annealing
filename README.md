@@ -9,9 +9,8 @@ learned a meaningful representation of the training data, the autoregressive dec
 ineffectuality of latent encodings and learn to ignore that information entirely. This results in a highly organized 
 latent space but a poor reconstruction efficiency of the trained model and will negatively impact the overall 
 performance of the autoencoder.  
+  
 This repository contains a simple implementation of KLD annealing in PyTorch.
-
-![KLD weight vs loss](https://github.com/hubertrybka/vae-annealing/blob/main/figures/kld_weight_plot.png)
 
 # Documentation
 
@@ -84,4 +83,4 @@ Returns:
  ```  
  The expected outcome:  
    
- ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/enable_disable.png)
+ ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/figures/enable_disable.png)
