@@ -11,8 +11,6 @@ latent space but a poor reconstruction efficiency of the trained model and will 
 performance of the autoencoder.  
 This repository contains a simple implementation of KLD annealing in PyTorch.
 
-![KLD weight vs loss](https://github.com/hubertrybka/vae-annealing/blob/main/figures/kld_weight_plot.png)
-
 # Documentation
 
 ## VAELoss
@@ -84,4 +82,4 @@ Returns:
  ```  
  The expected outcome:  
    
- ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/enable_disable.png)
+ ![Cyclical anneling disable](https://github.com/hubertrybka/vae-annealing/blob/main/figures/enable_disable.png)
