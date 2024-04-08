@@ -9,6 +9,7 @@ learned a meaningful representation of the training data, the autoregressive dec
 ineffectuality of latent encodings and learn to ignore that information entirely. This results in a highly organized 
 latent space but a poor reconstruction efficiency of the trained model and will negatively impact the overall 
 performance of the autoencoder.  
+  
 This repository contains a simple implementation of KLD annealing in PyTorch.
 
 # Documentation
