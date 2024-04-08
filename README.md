@@ -1,4 +1,20 @@
 # VAE annealing
+
+## What is it?
+
+KLD (Kullback–Leibler divergence) annealing is a technique used in training variational autoencoders (VAE), 
+specifically those based on an autoregressive decoder (ex. RNN such as LSTM or GRU). It is used to prevent the KL 
+divergence term from vanishing during training. During the initial stages of training, as the encoder has not yet 
+learned a meaningful representation of the training data, the autoregressive decoder may become misled by the 
+ineffectuality of latent encodings and learn to ignore that information entirely. This results in a highly organized 
+latent space but a poor reconstruction efficiency of the trained model and will negatively impact the overall 
+performance of the autoencoder.  
+This repository contains a simple implementation of KLD annealing in PyTorch.
+
+![KLD weight vs loss](https://github.com/hubertrybka/vae-annealing/blob/main/figures/kld_weight_plot.png)
+
+# Documentation
+
 ## VAELoss
  VAELoss is a subclass of torch.nn.Module. It is a standard loss function for training VAE (variational autoencoder) neural network. It is callable and takes four argments: 
  * x (torch.Tensor): reconstructed input tensor
@@ -23,7 +39,7 @@ Args:
 Returns:  
  * torch.tensor: KL divergence loss multiplied by the value of the annealing function
   
-![Basic anneling shapes](https://github.com/hubertrybka/vae-annealing/blob/main/shapes.png)
+![Basic anneling shapes](https://github.com/hubertrybka/vae-annealing/blob/main/figures/shapes.png)
  
  ## Usage
  ### Basic annealing
@@ -49,7 +65,7 @@ Returns:
  ### Cyclical annealing
  A method proposed by Fu _et al._ in their work [Cyclical Annealing Schedule: A Simple Approach to Mitigating KL Vanishing](https://arxiv.org/abs/1903.10145)  
    
- ![Cyclkical anneling shapes](https://github.com/hubertrybka/vae-annealing/blob/main/cyclical_shapes.png)
+ ![Cyclical anneling shapes](https://github.com/hubertrybka/vae-annealing/blob/main/figures/cyclical_shapes.png)
 
  Cyclical annealing is enabled by instantiating the Annealer with cyclical=True parameter. When this is done, every time the step counter (current_step) reaches total_steps, it's value is set to zero. The annealing cycle starts over again until it is disabled.  
    
