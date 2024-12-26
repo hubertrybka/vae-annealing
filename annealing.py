@@ -7,7 +7,7 @@ class Annealer:
     After each call, the step() function should be called to update the current epoch.
     """
 
-    def __init__(self, total_steps, shape, baseline=0.0, cyclical=False, disable=False):
+    def __init__(self, total_steps, shape='linear', baseline=0.0, cyclical=False, disable=False):
         """
         Parameters:
             total_steps (int): Number of epochs to reach full KL divergence weight.
@@ -16,14 +16,28 @@ class Annealer:
             cyclical (bool): Whether to repeat the annealing cycle after total_steps is reached.
             disable (bool): If true, the __call__ method returns unchanged input (no annealing).
         """
-        self.total_steps = total_steps
+
         self.current_step = 0
-        self.cyclical = cyclical
+
+        if shape not in ['linear', 'cosine', 'logistic']:
+            raise ValueError("Shape must be one of 'linear', 'cosine', or 'logistic.")
         self.shape = shape
+
+        if not 0 <= float(baseline) <= 1:
+            raise ValueError("Baseline must be a float between 0 and 1.")
         self.baseline = baseline
-        if disable:
-            self.shape = 'none'
-            self.baseline = 0.0
+
+        if type(total_steps) is not int or total_steps < 1:
+            raise ValueError("Argument total_steps must be an integer greater than 0")
+        self.total_steps = total_steps
+
+        if type(cyclical) is not bool:
+            raise ValueError("Argument cyclical must be a boolean.")
+        self.cyclical = cyclical
+
+        if type(disable) is not bool:
+            raise ValueError("Argument disable must be a boolean.")
+        self.disable = disable
 
     def __call__(self, kld):
         """
@@ -32,23 +46,10 @@ class Annealer:
         Returns:
             out (torch.tensor): KL divergence loss multiplied by the slope of the annealing function.
         """
-        out = kld * self.slope()
+        if self.disable:
+            return kld
+        out = kld * self._slope()
         return out
-
-    def slope(self):
-        if self.shape == 'linear':
-            y = (self.current_step / self.total_steps)
-        elif self.shape == 'cosine':
-            y = (math.cos(math.pi * (self.current_step / self.total_steps - 1)) + 1) / 2
-        elif self.shape == 'logistic':
-            exponent = ((self.total_steps / 2) - self.current_step)
-            y = 1 / (1 + math.exp(exponent))
-        elif self.shape == 'none':
-            y = 1.0
-        else:
-            raise ValueError('Invalid shape for annealing function. Must be linear, cosine, or logistic.')
-        y = self.add_baseline(y)
-        return y
 
     def step(self):
         if self.current_step < self.total_steps:
@@ -57,13 +58,26 @@ class Annealer:
             self.current_step = 0
         return
 
-    def add_baseline(self, y):
+    def set_cyclical(self, value):
+        if not isinstance(value, bool):
+            raise ValueError("Argument to cyclical method must be a boolean.")
+        self.cyclical = value
+        return
+
+
+    def _slope(self):
+        if self.shape == 'linear':
+            y = (self.current_step / self.total_steps)
+        elif self.shape == 'cosine':
+            y = (math.cos(math.pi * (self.current_step / self.total_steps - 1)) + 1) / 2
+        elif self.shape == 'logistic':
+            exponent = ((self.total_steps / 2) - self.current_step)
+            y = 1 / (1 + math.exp(exponent))
+        else:
+            y = 1.0
+        y = self._add_baseline(y)
+        return y
+
+    def _add_baseline(self, y):
         y_out = y * (1 - self.baseline) + self.baseline
         return y_out
-
-    def cyclical_setter(self, value):
-        if value is not bool:
-            raise ValueError('Cyclical_setter method requires boolean argument (True/False)')
-        else:
-            self.cyclical = value
-        return
