@@ -10,21 +10,12 @@ ineffectuality of latent encodings and learn to ignore that information entirely
 latent space but a poor reconstruction efficiency of the trained model and will negatively impact the overall 
 performance of the autoencoder.  
   
-This repository contains a simple implementation of KLD annealing in PyTorch.
+![Basic annealing shapes](https://github.com/hubertrybka/vae-annealing/blob/main/figures/annealing_example.png)
+
+This repository contains a simple implementation of KLD annealing and a PyTorch VAE loss function.
 
 # Documentation
 
-## VAELoss
- VAELoss is a subclass of torch.nn.Module. It is a standard loss function for training VAE (variational autoencoder) neural networks. It is callable and takes four arguments: 
- * x (torch.Tensor): reconstructed input tensor
- * x0 (torch.Tensor): input tensor
- * mu (torch.Tensor): mean of the latent space
- * logvar (torch.Tensor): log variance of the latent space
-  
- When called, it returns two instances of single-valued torch.Tensor, which can be passed to an optimizer: 
- * bce (recon loss component)
- * kld (divergence loss component)
-  
 ## Annealer  
  Annealer is a class. An instance is created by passing two parameters:
  * total_steps (int): Number of epochs (steps) to reach full KL divergence weight
@@ -37,6 +28,18 @@ Args:
   
 Returns:  
  * torch.tensor: KL divergence loss multiplied by the value of the annealing function
+
+
+## VAELoss
+ VAELoss is a subclass of torch.nn.Module. It is a standard loss function for training VAE (variational autoencoder) neural networks. It is callable and takes four arguments: 
+ * x (torch.Tensor): reconstructed input tensor
+ * x0 (torch.Tensor): input tensor
+ * mu (torch.Tensor): mean of the latent space
+ * logvar (torch.Tensor): log variance of the latent space
+  
+ When called, it returns two instances of single-valued torch.Tensor, which can be passed to an optimizer: 
+ * bce (recon loss component)
+ * kld (divergence loss component)
   
 ![Basic annealing shapes](https://github.com/hubertrybka/vae-annealing/blob/main/figures/shapes.png)
  
@@ -68,7 +71,7 @@ Returns:
 
  Cyclical annealing is enabled by instantiating the Annealer with cyclical=True parameter. When this is done, every time the step counter (current_step) reaches total_steps, its value is set to zero. The annealing cycle starts over again until it is disabled.  
    
- The cyclical annealing functionality can be disabled (or enabled) during training by passing False (or True) value to the Annealer.cyclical_setter() method. An example of cyclical annealing being **disabled at epoch 30** and **enabled again at epoch 70** is illustrated below:
+ The cyclical annealing functionality can be disabled (or enabled) during training by passing False (or True) value to the Annealer.set_cyclica() method. An example of cyclical annealing being **disabled at epoch 30** and **enabled again at epoch 70** is illustrated below:
  ```
  annealing_agent = Annealer(total_steps, shape='cosine', cyclical=True)
  # Instantiating annealing agent with cyclical annealing functionality
@@ -77,9 +80,9 @@ Returns:
      ...  # training script
 
      if epoch == 30:
-         annealing_agent.cyclical_setter(False)
+         annealing_agent.set_cyclical(False)
      if epoch == 70:
-         annealing_agent.cyclical_setter(True)
+         annealing_agent.set_cyclical(True)
  ```  
  The expected outcome:  
    
