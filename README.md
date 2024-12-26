@@ -4,7 +4,9 @@
 
 KLD (Kullback–Leibler divergence) annealing is a technique used in training variational autoencoders (VAE), 
 specifically those based on an autoregressive decoder (ex. RNN such as LSTM or GRU). It is used to prevent the KL 
-divergence term from vanishing during training. During the initial stages of training, as the encoder has not yet 
+divergence term from vanishing during training. 
+
+During the initial stages of training, as the encoder has not yet 
 learned a meaningful representation of the training data, the autoregressive decoder may become misled by the 
 ineffectuality of latent encodings and learn to ignore that information entirely. This results in a highly organized 
 latent space but a poor reconstruction efficiency of the trained model and will negatively impact the overall 
